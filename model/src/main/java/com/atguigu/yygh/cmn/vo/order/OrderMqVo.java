@@ -18,8 +18,6 @@ public class OrderMqVo {
 	@ApiModelProperty(value = "排班id")
 	private String scheduleId;
 
-	@ApiModelProperty(value = "短信实体")
-	private MsmVo msmVo;
 
 }
 

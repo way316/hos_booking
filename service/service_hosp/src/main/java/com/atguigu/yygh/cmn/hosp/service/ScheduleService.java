@@ -1,6 +1,7 @@
 package com.atguigu.yygh.cmn.hosp.service;
 
 import com.atguigu.yygh.cmn.model.hosp.Schedule;
+import com.atguigu.yygh.cmn.vo.hosp.ScheduleOrderVo;
 import com.atguigu.yygh.cmn.vo.hosp.ScheduleQueryVo;
 import org.springframework.data.domain.Page;
 
@@ -20,4 +21,12 @@ public interface ScheduleService {
     Map<String, Object> getRuleSchedule(long page, long limit, String hoscode, String depcode);
 
     List<Schedule> getDetailSchedule(String hoscode, String depcode, String workDate);
+
+    Map<String,Object> getBookingScheduleRule(Integer page, Integer limit, String hoscode, String depcode);
+
+    Schedule getScheduleId(String scheduleId);
+
+    ScheduleOrderVo getScheduleOrderVo(String scheduleId);
+
+    void update(Schedule schedule);
 }

@@ -58,6 +58,7 @@ public class ApiController {
         hospitalService.save(paramMap);
         return Result.ok();
     }
+
     //医院查询接口
     @PostMapping("hospital/show")
     public Result getHospital(HttpServletRequest request) {

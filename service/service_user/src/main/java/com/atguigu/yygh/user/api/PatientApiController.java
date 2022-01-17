@@ -4,6 +4,8 @@ import com.atguigu.yygh.cmn.common.result.Result;
 import com.atguigu.yygh.cmn.common.utils.AuthContextHolder;
 import com.atguigu.yygh.cmn.model.user.Patient;
 import com.atguigu.yygh.user.service.PatientService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -64,5 +66,6 @@ public class PatientApiController {
         Patient patient = patientService.getPatientId(id);
         return patient;
     }
+
 
 }

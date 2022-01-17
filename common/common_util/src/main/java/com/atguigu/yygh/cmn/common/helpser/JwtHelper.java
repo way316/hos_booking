@@ -8,6 +8,7 @@ import java.util.Date;
 public class JwtHelper {
     //过期时间
     private static long tokenExpiration = 24*60*60*1000;
+
     //秘钥
     private static String tokenSignKey = "123456";
 
@@ -31,6 +32,7 @@ public class JwtHelper {
         Integer userId = (Integer)claims.get("userId");
         return userId.longValue();
     }
+
     public static String getUserName(String token) {
         if(StringUtils.isEmpty(token)) return "";
         Jws<Claims> claimsJws
@@ -38,6 +40,7 @@ public class JwtHelper {
         Claims claims = claimsJws.getBody();
         return (String)claims.get("userName");
     }
+
     public static void main(String[] args) {
         String token = JwtHelper.createToken(1L, "55");
         System.out.println(token);

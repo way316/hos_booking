@@ -37,6 +37,10 @@ public class User extends BaseEntity {
     @TableField("certificates_no")
     private String certificatesNo;
 
+    @ApiModelProperty(value = "状态")
+    @TableField("status")
+    private String status;
+
     @ApiModelProperty(value = "证件路径")
     @TableField("certificates_url")
     private String certificatesUrl;

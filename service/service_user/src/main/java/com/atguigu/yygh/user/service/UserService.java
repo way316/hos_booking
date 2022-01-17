@@ -18,4 +18,12 @@ public interface UserService extends IService<User> {
     Map<String, Object> loginUser(LoginVo loginVo);
 
     void userAuth(Long userId, UserAuthVo userAuthVo);
+
+    Map<String, Object> show(Long userId);
+
+    void approval(Long userId, Integer authStatus);
+
+    void lock(Long userId, Integer status);
+
+    IPage<User> selectPage(Page<User> pageParam, UserInfoQueryVo userInfoQueryVo);
 }

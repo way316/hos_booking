@@ -8,6 +8,7 @@ import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.core.io.buffer.DataBuffer;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
@@ -27,6 +28,7 @@ import java.util.List;
  * @author qy
  * @since 2019-11-21
  */
+
 @Component
 public class AuthGlobalFilter implements GlobalFilter, Ordered {
 
@@ -44,9 +46,9 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
             return out(response, ResultCodeEnum.PERMISSION);
         }
 
-        Long userId = this.getUserId(request);
         //api接口，异步请求，校验用户必须登录
         if(antPathMatcher.match("/api/**/auth/**", path)) {
+            Long userId = this.getUserId(request);
             if(StringUtils.isEmpty(userId)) {
                 ServerHttpResponse response = exchange.getResponse();
                 return out(response, ResultCodeEnum.LOGIN_AUTH);
@@ -65,6 +67,7 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
      * @param response
      * @return
      */
+
     private Mono<Void> out(ServerHttpResponse response, ResultCodeEnum resultCodeEnum) {
         Result result = Result.build(null, resultCodeEnum);
         byte[] bits = JSONObject.toJSONString(result).getBytes(StandardCharsets.UTF_8);
@@ -79,8 +82,10 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
      * @param request
      * @return
      */
+
     private Long getUserId(ServerHttpRequest request) {
         String token = "";
+        HttpHeaders httpHeaders = request.getHeaders();
         List<String> tokenList = request.getHeaders().get("token");
         if(null  != tokenList) {
             token = tokenList.get(0);
@@ -90,4 +95,5 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
         }
         return null;
     }
+
 }
